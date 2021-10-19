@@ -21,3 +21,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 define( 'WPDSYNC_TEMPLATE_VERSION', '1.0.0' );
 
+/**
+ * Add custom term parent.
+ *
+ * @param array  $term_parents
+ * @param array  $term
+ * @param string $taxonomy
+ *
+ * @return array
+ */
+
+add_action( 'wp_data_sync_term_parents', function( $term_parents, $term, $taxonomy ) {
+
+	if ( isset( $term_parents['type'] ) && 'product_cat' === $taxonomy ) {
+
+		Log::write( 'custom-term-parents', $term_parents );
+
+		$additional_parent_term                = [];
+		$additional_parent_term['mattresses'] = [
+			'name'        => 'Mattresses',
+			'description' => '',
+			'thumb_url'   => '',
+			'term_meta'   => []
+		];
+
+
+		$term_parents = $additional_parent_term + $term_parents;
+
+		Log::write( 'custom-term-parents', $term_parents );
+
+	}
+
+	return $term_parents;
+
+}, 20, 3 );
