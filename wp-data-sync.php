@@ -3,7 +3,7 @@
  * Plugin Name: WP Data Sync - Custom Parent Term
  * Plugin URI:  https://wpdatasync.com/products/
  * Description: Add a custom parent term to existing parent terms.
- * Version:     1.0.0
+ * Version:     1.0.1
  * Author:      WP Data Sync
  * Author URI:  https://wpdatasync.com
  * License:     GPL2
@@ -18,8 +18,6 @@ namespace WP_DataSync\App;
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-
-define( 'WPDSYNC_TEMPLATE_VERSION', '1.0.0' );
 
 /**
  * Add custom term parent.
