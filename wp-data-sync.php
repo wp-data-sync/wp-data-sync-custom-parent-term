@@ -33,7 +33,7 @@ add_action( 'wp_data_sync_term_parents', function( $term_parents, $term, $taxono
 
 	if ( isset( $term_parents['type'] ) && 'product_cat' === $taxonomy ) {
 
-		Log::write( 'custom-term-parents', $term_parents );
+		Log::write( 'custom-term-parents', $term_parents, 'Before add parent term' );
 
 		$additional_parent_term                = [];
 		$additional_parent_term['mattresses'] = [
@@ -46,7 +46,7 @@ add_action( 'wp_data_sync_term_parents', function( $term_parents, $term, $taxono
 
 		$term_parents = $additional_parent_term + $term_parents;
 
-		Log::write( 'custom-term-parents', $term_parents );
+		Log::write( 'custom-term-parents', $term_parents, 'After add parent term' );
 
 	}
 
