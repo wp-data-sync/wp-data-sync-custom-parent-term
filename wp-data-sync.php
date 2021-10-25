@@ -33,20 +33,24 @@ add_action( 'wp_data_sync_term_parents', function( $term_parents, $term, $taxono
 
 	if ( isset( $term_parents['type'] ) && 'product_cat' === $taxonomy ) {
 
-		Log::write( 'custom-term-parents', $term_parents, 'Before add parent term' );
+		Log::write( 'custom-term-parents', $term_parents, 'Before modify parent terms' );
 
-		$additional_parent_term                = [];
-		$additional_parent_term['mattresses'] = [
-			'name'        => 'Mattresses',
-			'description' => '',
-			'thumb_url'   => '',
-			'term_meta'   => []
+		$term_parents = [
+			'mattresses' => [
+				'name'        => 'Mattresses',
+				'description' => '',
+				'thumb_url'   => '',
+				'term_meta'   => []
+			],
+			'type' => [
+				'name'        => 'Type',
+				'description' => '',
+				'thumb_url'   => '',
+				'term_meta'   => []
+			]
 		];
 
-
-		$term_parents = $additional_parent_term + $term_parents;
-
-		Log::write( 'custom-term-parents', $term_parents, 'After add parent term' );
+		Log::write( 'custom-term-parents', $term_parents, 'After modify parent terms' );
 
 	}
 
