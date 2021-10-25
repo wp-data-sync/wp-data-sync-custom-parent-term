@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action( 'wp_data_sync_term_parents', function( $term_parents, $term, $taxonomy ) {
 
-	if ( isset( $term_parents['type'] ) && 'product_cat' === $taxonomy ) {
+	if ( isset( $term_parents['type'] ) && ! isset( $term_parents['mattresses'] ) && 'product_cat' === $taxonomy ) {
 
 		Log::write( 'custom-term-parents', $term_parents, 'Before modify parent terms' );
 
