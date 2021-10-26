@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return array
  */
 
-add_action( 'wp_data_sync_term_parents', function( $term_parents, $term, $taxonomy ) {
+add_filter( 'wp_data_sync_term_parents', function( $term_parents, $term, $taxonomy ) {
 
 	if ( isset( $term_parents['type'] ) && ! isset( $term_parents['mattresses'] ) && 'product_cat' === $taxonomy ) {
 
