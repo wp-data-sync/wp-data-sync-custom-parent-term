@@ -31,26 +31,41 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_filter( 'wp_data_sync_term_parents', function( $term_parents, $term, $taxonomy ) {
 
-	if ( isset( $term_parents['type'] ) && ! isset( $term_parents['mattresses'] ) && 'product_cat' === $taxonomy ) {
+	if ( 'product_cat' !== $taxonomy ) {
+		return $term_parents;
+	}
 
-		Log::write( 'custom-term-parents', $term_parents, 'Before modify parent terms' );
+	if ( isset( $term_parents['mattresses'] ) ) {
+		return $term_parents;
+	}
 
-		$term_parents = [
-			'mattresses' => [
-				'name'        => 'Mattresses',
-				'description' => '',
-				'thumb_url'   => '',
-				'term_meta'   => []
-			],
-			'type' => [
-				'name'        => 'Type',
-				'description' => '',
-				'thumb_url'   => '',
-				'term_meta'   => []
-			]
-		];
+	$_terms = [
+		'type',
+		'size',
+		'comfort',
+		'sleep-accessories'
+	];
 
-		Log::write( 'custom-term-parents', $term_parents, 'After modify parent terms' );
+	foreach ( $_terms as $_term ) {
+
+		if ( isset( $term_parents[ $_term ] ) ) {
+
+			Log::write( 'custom-term-parents', $term_parents, 'Before modify parent terms' );
+
+			$_term_parents = array_merge( [
+				'mattresses' => [
+					'name'        => 'Mattresses',
+					'description' => '',
+					'thumb_url'   => '',
+					'term_meta'   => []
+				]
+			], $term_parents );
+
+			Log::write( 'custom-term-parents', $_term_parents, 'After modify parent terms' );
+
+			return $_term_parents;
+
+		}
 
 	}
 
